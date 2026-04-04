@@ -285,21 +285,39 @@
     });
 
     async function loadQuestions() {
-        try {
-            const querySnapshot = await getDocs(collection(db, "quizQuestions"));
-            questions = querySnapshot.docs.map(doc => doc.data());
+    try {
+        // 🔥 STEP 1: Get active exam ID
+        const activeDoc = await getDoc(doc(db, "activeExam", "current"));
 
-            if (questions.length === 0) {
-                alert("No questions found in the database.");
-                return;
-            }
-
-            createNavBar();
-            displayQuestion();
-        } catch (error) {
-            console.error("Error loading questions: ", error);
+        if (!activeDoc.exists()) {
+            alert("No active exam set!");
+            return;
         }
+
+        const activeExamId = activeDoc.data().examId;
+
+        // 🔥 STEP 2: Fetch ONLY that exam's questions
+        const q = query(
+            collection(db, "quizQuestions"),
+            where("examId", "==", activeExamId)
+        );
+
+        const querySnapshot = await getDocs(q);
+
+        questions = querySnapshot.docs.map(doc => doc.data());
+
+        if (questions.length === 0) {
+            alert("No questions found for this exam.");
+            return;
+        }
+
+        createNavBar();
+        displayQuestion();
+
+    } catch (error) {
+        console.error("Error loading questions: ", error);
     }
+}
 
     function createNavBar() {
         const navBar = document.createElement("div");

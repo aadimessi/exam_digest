@@ -294,7 +294,7 @@
             return;
         }
 
-        const activeExamId = activeDoc.data().examId;
+        const activeExamId = String(activeDoc.data().examId).trim();
 
         // 🔥 STEP 2: Fetch ONLY that exam's questions
         const q = query(

@@ -319,30 +319,25 @@
     }
 }
 
-    function createNavBar() {
-        const navBar = document.createElement("div");
-        navBar.id = "nav-bar";
-        navBar.style.marginTop = "20px";
-        navBar.style.display = "flex";
-        navBar.style.flexWrap = "wrap";
-        navBar.style.justifyContent = "center";
-        navBar.style.gap = "10px";
+function createNavBar() {
+    const navBar = document.getElementById("nav-bar"); // ✅ use existing
+    navBar.innerHTML = ""; // clear old buttons
 
-        for (let i = 0; i < questions.length; i++) {
-            const navBtn = document.createElement("button");
-            navBtn.textContent = i + 1;
-            navBtn.classList.add("btn");
-            navBtn.style.width = "40px";
-            navBtn.style.padding = "10px";
-            navBtn.onclick = () => {
-                currentQuestionIndex = i;
-                displayQuestion();
-            };
-            navBar.appendChild(navBtn);
-        }
+    for (let i = 0; i < questions.length; i++) {
+        const navBtn = document.createElement("button");
+        navBtn.textContent = i + 1;
+        navBtn.classList.add("btn");
+        navBtn.style.width = "40px";
+        navBtn.style.padding = "10px";
 
-        document.getElementById("quizSection").appendChild(navBar);
+        navBtn.onclick = () => {
+            currentQuestionIndex = i;
+            displayQuestion();
+        };
+
+        navBar.appendChild(navBtn);
     }
+}
 
     function updateNavBar() {
         const navButtons = document.querySelectorAll("#nav-bar button");

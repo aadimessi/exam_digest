@@ -4,53 +4,144 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Add Questions</title>
+
+    <!-- 🔥 UI Styling Added -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h2, h3 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 6px 0 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            padding: 8px 14px;
+            border: none;
+            border-radius: 6px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li button {
+            background: #dc3545;
+        }
+
+        li button:hover {
+            background: #a71d2a;
+        }
+
+        .section {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f9fafc;
+            border: 1px solid #eee;
+        }
+    </style>
 </head>
+
 <body>
+
+<div class="container">
+
     <h2>Add Quiz Question</h2>
 
-    <!-- 🔥 NEW: Exam Selector -->
-    <h3>Select Exam</h3>
-    <select id="examSelect">
-        <option value="1">Math Mid 1</option>
-        <option value="2">DSA Quiz</option>
-        <option value="3">OS Test</option>
-        <option value="4">OS Test</option>
-        <option value="5">OS Test</option>
-        <option value="6">OS Test</option>
-        <option value="7">OS Test</option>
-        <option value="8">OS Test</option>
-        <option value="9">OS Test</option>
-        <option value="10">OS Test</option>
-        
-    </select>
+    <div class="section">
 
-    <input type="text" id="question-input" placeholder="Enter question"><br>
-    <input type="text" id="option1" placeholder="Option 1"><br>
-    <input type="text" id="option2" placeholder="Option 2"><br>
-    <input type="text" id="option3" placeholder="Option 3"><br>
-    <input type="text" id="option4" placeholder="Option 4"><br>
+        <!-- 🔥 SAME COMPONENT -->
+        <h3>Select Exam</h3>
+        <select id="examSelect">
+            <option value="1">Math Mid 1</option>
+            <option value="2">DSA Quiz</option>
+            <option value="3">OS Test</option>
+            <option value="4">OS Test</option>
+            <option value="5">OS Test</option>
+            <option value="6">OS Test</option>
+            <option value="7">OS Test</option>
+            <option value="8">OS Test</option>
+            <option value="9">OS Test</option>
+            <option value="10">OS Test</option>
+        </select>
 
-    <label>Correct Answer:</label>
-    <select id="correct-answer">
-        <option value="0">Option 1</option>
-        <option value="1">Option 2</option>
-        <option value="2">Option 3</option>
-        <option value="3">Option 4</option>
-    </select>
+        <!-- 🔥 SAME INPUTS -->
+        <input type="text" id="question-input" placeholder="Enter question"><br>
+        <input type="text" id="option1" placeholder="Option 1"><br>
+        <input type="text" id="option2" placeholder="Option 2"><br>
+        <input type="text" id="option3" placeholder="Option 3"><br>
+        <input type="text" id="option4" placeholder="Option 4"><br>
 
-    <button id="saveQuestionBtn">Save Question</button>
+        <label>Correct Answer:</label>
+        <select id="correct-answer">
+            <option value="0">Option 1</option>
+            <option value="1">Option 2</option>
+            <option value="2">Option 3</option>
+            <option value="3">Option 4</option>
+        </select>
 
-    <h3>Saved Questions</h3>
-    <ul id="question-list"></ul>
+        <button id="saveQuestionBtn">Save Question</button>
+    </div>
+
+    <div class="section">
+        <h3>Saved Questions</h3>
+        <ul id="question-list"></ul>
+    </div>
 
     <h2>Add Student</h2>
-    <input type="text" id="student-name" placeholder="Student Name"><br>
-    <input type="text" id="student-id" placeholder="Student ID"><br>
-    <button id="saveStudentBtn">Save Student</button>
 
-    <h3>Student List</h3>
-    <ul id="student-list"></ul>
+    <div class="section">
+        <input type="text" id="student-name" placeholder="Student Name"><br>
+        <input type="text" id="student-id" placeholder="Student ID"><br>
+        <button id="saveStudentBtn">Save Student</button>
+    </div>
 
-    <script type="module" src="admin.js"></script>
+    <div class="section">
+        <h3>Student List</h3>
+        <ul id="student-list"></ul>
+    </div>
+
+</div>
+
+<script type="module" src="admin.js"></script>
+
 </body>
 </html>

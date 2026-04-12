@@ -173,15 +173,20 @@
             padding: 8px;
         }
 
-        .nav-bar {
-            flex-direction: column;
-            align-items: center;
-        }
+.nav-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
 
-        .nav-button {
-            width: 100%;
-            font-size: 0.9rem;
-        }
+.nav-button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 14px;
+    border-radius: 6px;
+}
 
         #timer {
             font-size: 1rem;
@@ -329,15 +334,15 @@
 }
 
 function createNavBar() {
-    const navBar = document.getElementById("nav-bar"); // ✅ use existing
-    navBar.innerHTML = ""; // clear old buttons
+    const navBar = document.getElementById("nav-bar");
+    navBar.innerHTML = "";
 
     for (let i = 0; i < questions.length; i++) {
         const navBtn = document.createElement("button");
         navBtn.textContent = i + 1;
-        navBtn.classList.add("btn");
-        navBtn.style.width = "40px";
-        navBtn.style.padding = "10px";
+
+        // ✅ USE THIS (NOT "btn")
+        navBtn.classList.add("nav-button");
 
         navBtn.onclick = () => {
             currentQuestionIndex = i;
@@ -347,7 +352,6 @@ function createNavBar() {
         navBar.appendChild(navBtn);
     }
 }
-
     function updateNavBar() {
         const navButtons = document.querySelectorAll("#nav-bar button");
         navButtons.forEach((btn, index) => {

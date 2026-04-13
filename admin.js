@@ -1,8 +1,6 @@
-// 🔹 Import Firebase Modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-// 🔹 Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAdvbkZaLSJsJlaAkURHACbt2cJtemBa5U",
     authDomain: "quiz-app-e8d1d.firebaseapp.com",
@@ -12,11 +10,9 @@ const firebaseConfig = {
     appId: "1:421848385039:web:cbb560cf9d839752ce457a"
 };
 
-// 🔹 Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 🔹 Function to Add Question to Firestore
 async function addQuestion() {
     const questionText = document.getElementById('question-input').value.trim();
     const options = [
@@ -26,10 +22,9 @@ async function addQuestion() {
         document.getElementById('option4').value.trim()
     ];
     const correctAnswerIndex = document.getElementById('correct-answer').value;
-    const correctAnswer = options[correctAnswerIndex]; // Store correct answer as text
+    const correctAnswer = options[correctAnswerIndex]; 
     const saveButton = document.getElementById("saveQuestionBtn");
 
-    // 🔥 NEW LINE: Get selected exam
     const examId = document.getElementById("examSelect").value;
 
     if (!questionText || options.includes("")) {
@@ -37,28 +32,27 @@ async function addQuestion() {
         return;
     }
 
-    saveButton.disabled = true; // Disable button to prevent multiple submissions
+    saveButton.disabled = true; 
 
     try {
         await addDoc(collection(db, "quizQuestions"), {
             question: questionText,
             options: options,
             correctAnswer: correctAnswer,
-            examId: examId   // 🔥 NEW FIELD ADDED
+            examId: examId   
         });
 
         alert("✅ Question added successfully!");
         clearQuestionFields();
-        displayQuestions(); // Refresh displayed questions
+        displayQuestions(); 
     } catch (error) {
         console.error("❌ Error adding question:", error);
         alert("Failed to save question.");
     } finally {
-        saveButton.disabled = false; // Re-enable button
+        saveButton.disabled = false; 
     }
 }
 
-// 🔹 Function to Display Questions from Firebase
 async function displayQuestions() {
     const questionList = document.getElementById("question-list");
     questionList.innerHTML = "Loading...";
@@ -80,7 +74,6 @@ async function displayQuestions() {
     }
 }
 
-// 🔹 Function to Add Student to Firestore
 async function addStudent() {
     const studentName = document.getElementById('student-name').value.trim();
     const studentID = document.getElementById('student-id').value.trim();
@@ -91,7 +84,7 @@ async function addStudent() {
         return;
     }
 
-    saveStudentBtn.disabled = true; // Disable button during submission
+    saveStudentBtn.disabled = true; 
 
     try {
         await addDoc(collection(db, "students"), {
@@ -101,16 +94,15 @@ async function addStudent() {
 
         alert("✅ Student added successfully!");
         clearStudentFields();
-        displayStudents(); // Refresh student list
+        displayStudents(); 
     } catch (error) {
         console.error("❌ Error adding student:", error);
         alert("Failed to add student.");
     } finally {
-        saveStudentBtn.disabled = false; // Re-enable button
+        saveStudentBtn.disabled = false; 
     }
 }
 
-// 🔹 Function to Display Students from Firestore
 async function displayStudents() {
     const studentList = document.getElementById("student-list");
     studentList.innerHTML = "Loading...";
@@ -132,21 +124,19 @@ async function displayStudents() {
     }
 }
 
-// 🔹 Function to Delete a Student
 async function deleteStudent(id) {
     if (!confirm("Are you sure you want to delete this student?")) return;
 
     try {
         await deleteDoc(doc(db, "students", id));
         alert("🗑️ Student deleted successfully!");
-        displayStudents(); // Refresh the list
+        displayStudents(); 
     } catch (error) {
         console.error("❌ Error deleting student:", error);
         alert("Failed to delete student.");
     }
 }
 
-// 🔹 Function to Clear Input Fields
 function clearQuestionFields() {
     document.getElementById('question-input').value = "";
     document.getElementById('option1').value = "";
@@ -161,11 +151,9 @@ function clearStudentFields() {
     document.getElementById('student-id').value = "";
 }
 
-// 🔹 Event Listeners
 document.getElementById("saveQuestionBtn").addEventListener("click", addQuestion);
 document.getElementById("saveStudentBtn").addEventListener("click", addStudent);
 
-// 🔹 Call functions on Page Load
 window.onload = function () {
     displayQuestions();
     displayStudents();
